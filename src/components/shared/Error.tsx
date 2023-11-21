@@ -6,7 +6,7 @@ const StyledError = styled.div`
   width: fit-content;
   padding: 10px 20px;
   border-radius: ${borderRadius};
-  background-color: ${colors.errorBgColor};
+  background-color: ${colors.error};
 `;
 
 export function Error({ children }: PropsWithChildren) {

@@ -4,16 +4,16 @@ import { borderRadius, colors } from "../../styles.ts";
 
 const StyledInput = styled.input`
   padding: 10px 15px;
-  color: ${colors.primaryColor};
-  background-color: ${colors.bgColor};
+  color: ${colors.primary};
+  background-color: ${colors.bg};
   border: none;
   border-radius: ${borderRadius};
   font-size: 16px;
   &:hover {
-    background-color: ${colors.bgHoverColor};
+    background-color: ${colors.bgHover};
   }
   &:focus {
-    background-color: ${colors.bgFocusColor};
+    background-color: ${colors.bgFocus};
   }
 `;
 

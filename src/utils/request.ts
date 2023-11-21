@@ -5,7 +5,7 @@ type RequestType = "get" | "post";
 export async function request<T>(
   url: string,
   type: RequestType = "get",
-  data?: any,
+  data?: { [key: string]: string },
   config?: AxiosRequestConfig,
 ): Promise<T> {
   let response;

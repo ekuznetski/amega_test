@@ -16,9 +16,9 @@ const StyledInfo = styled.div`
   gap: 20px;
   width: 1000px;
   max-width: 90vw;
-  background-color: ${colors.bgColor};
+  background-color: ${colors.bg};
   > *:not(:first-child) {
-    border-left: 1px solid ${colors.secondaryColor};
+    border-left: 1px solid ${colors.secondary};
     padding-left: 20px;
   }
   padding: 20px 10px;

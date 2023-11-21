@@ -17,8 +17,8 @@ const GlobalStyle = createGlobalStyle`
     body {
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
-        background: ${colors.bgColor};
-        color: ${colors.primaryColor};
+        background: ${colors.bg};
+        color: ${colors.primary};
         font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     }
     *:active,
