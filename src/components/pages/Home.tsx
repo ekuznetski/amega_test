@@ -29,6 +29,9 @@ const StyleInfoAndInputWrapper = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
+  @media (max-width: 760px) {
+    top: 15px;
+  }
 `;
 
 export function Home() {

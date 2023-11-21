@@ -27,9 +27,8 @@ const StyledInfo = styled.div`
     flex-direction: column;
     > *:not(:first-child) {
       border-left: none;
-      border-top: 1px solid ${colors.secondary};
       padding-left: 0;
-      padding-top: 20px;
+      padding-top: 10px;
     }
   }
 `;
