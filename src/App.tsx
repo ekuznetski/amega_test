@@ -1,41 +1,52 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "leaflet/dist/leaflet.css";
-import { useCallback, useEffect, useState } from "react";
-import { Map } from "./components/core/map.tsx";
-import "./App.css";
-import { useIPDetails } from "./hooks/useIPDetails.ts";
-import { debounce } from "./utils/debounce.ts";
+import { createGlobalStyle } from "styled-components";
+import { Home } from "./components/pages/Home.tsx";
+import { colors } from "./styles.ts";
+
+const queryClient = new QueryClient();
+
+const GlobalStyle = createGlobalStyle`
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    * {
+        margin: 0;
+    }
+    body {
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        background: ${colors.bgColor};
+        color: ${colors.primaryColor};
+        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    }
+    *:active,
+    *:focus {
+        outline: none;
+    }
+    img, picture, video, canvas, svg {
+        display: block;
+        max-width: 100%;
+    }
+    input, button, textarea, select {
+        font: inherit;
+    }
+    p, h1, h2, h3, h4, h5, h6 {
+        overflow-wrap: break-word;
+    }
+    .leaflet-control-attribution.leaflet-control{
+        display: none;
+    }
+`;
 
 function App() {
-  const [value, setValue] = useState("");
-  const [debouncedValue, setDebouncedValue] = useState("");
-  const updateDebouncedValue = useCallback(
-    debounce(setDebouncedValue, 200),
-    [],
-  );
-  const ipDetails = useIPDetails(debouncedValue);
-  useEffect(() => {
-    if (value === "") {
-      setValue(ipDetails?.ip ?? "");
-    }
-  }, [ipDetails, value]);
   return (
-    <>
-      <input
-        onChange={(e) => {
-          updateDebouncedValue(e.target.value);
-          setValue(e.target.value);
-        }}
-        value={value}
-      />
-      {ipDetails && ipDetails.success ? (
-        <>
-          <div>{ipDetails.city}</div>
-          <Map lat={ipDetails.latitude} lng={ipDetails.longitude} />
-        </>
-      ) : (
-        <div>Invalid IP address</div>
-      )}
-    </>
+    <QueryClientProvider client={queryClient}>
+      <GlobalStyle />
+      <Home />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

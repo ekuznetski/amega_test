@@ -1,14 +1,14 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { IpDetails } from "../domain/interfaces/ipDetails.ts";
+import { request } from "../utils/request.ts";
 
-export function useIPDetails(ip?: string): IpDetails | null {
-  const [ipDetails, setIpDetails] = useState<IpDetails | null>(null);
-  useEffect(() => {
-    //todo move to request.ts
-    axios.get<IpDetails>(`https://ipwho.is/${ip ?? ""}`).then((res) => {
-      setIpDetails(res.data);
-    });
-  }, [ip]);
-  return ipDetails;
+export function useIPDetails(ip?: string) {
+  return useQuery<IpDetails, Error>({
+    queryKey: ["ipDetails", ip],
+    queryFn: () => request<IpDetails>(`https://ipwho.is/${ip ?? ""}`),
+    staleTime: Infinity,
+    gcTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 }
